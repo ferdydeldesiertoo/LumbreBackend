@@ -1,4 +1,4 @@
-package com.lumbre.user.exception
+package com.lumbre.auth.exception
 
 class UserAlreadyExistsException(username: String) : RuntimeException(username) {
 }

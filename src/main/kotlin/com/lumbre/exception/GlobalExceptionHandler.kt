@@ -4,7 +4,7 @@ import com.lumbre.friendship.exception.FriendshipAlreadyRequestedException
 import com.lumbre.friendship.exception.FriendshipNotFoundException
 import com.lumbre.friendship.exception.InvalidFriendshipStatusException
 import com.lumbre.friendship.exception.SelfFriendshipException
-import com.lumbre.user.exception.UserAlreadyExistsException
+import com.lumbre.auth.exception.UserAlreadyExistsException
 import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

@@ -1,8 +1,7 @@
 package com.lumbre.security
 
-import com.lumbre.user.dto.SimpleUserProjection
-import com.lumbre.user.entity.User
-import com.lumbre.user.exception.UserNotFoundException
+import com.lumbre.auth.dto.SimpleUserProjection
+import com.lumbre.auth.exception.UserNotFoundException
 import com.lumbre.user.repository.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.userdetails.UserDetails

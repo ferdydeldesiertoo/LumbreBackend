@@ -10,7 +10,7 @@ import com.lumbre.friendship.exception.InvalidFriendshipStatusException
 import com.lumbre.friendship.exception.SelfFriendshipException
 import com.lumbre.friendship.repository.FriendshipRepository
 import com.lumbre.user.entity.User
-import com.lumbre.user.exception.UserNotFoundException
+import com.lumbre.auth.exception.UserNotFoundException
 import com.lumbre.user.repository.UserRepository
 import jakarta.persistence.EntityManager
 import jakarta.transaction.Transactional

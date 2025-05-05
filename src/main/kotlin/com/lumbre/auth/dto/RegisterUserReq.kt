@@ -1,4 +1,4 @@
-package com.lumbre.user.dto
+package com.lumbre.auth.dto
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.lumbre.common.TrimStringDeserializer
