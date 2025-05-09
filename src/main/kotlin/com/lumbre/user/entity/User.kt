@@ -2,6 +2,7 @@ package com.lumbre.user.entity
 
 import com.lumbre.friendship.entity.Friendship
 import com.lumbre.messages.entity.Message
+import com.lumbre.user.dto.UserInfoRes
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.*
@@ -38,3 +39,7 @@ class User(
     @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val receivedMessages: List<Message> = emptyList(),
 )
+
+fun User.toUserInfo(): UserInfoRes {
+    return UserInfoRes(id!!, username, bio, profileImageUrl)
+}
