@@ -2,6 +2,7 @@ package com.lumbre.security
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import java.security.Principal
 import java.util.*
 
 class CustomUserDetails(

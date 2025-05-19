@@ -11,6 +11,7 @@ import com.lumbre.friendship.exception.SelfFriendshipException
 import com.lumbre.friendship.repository.FriendshipRepository
 import com.lumbre.user.entity.User
 import com.lumbre.auth.exception.UserNotFoundException
+import com.lumbre.friendship.dto.FriendshipWithUserProjection
 import com.lumbre.user.repository.UserRepository
 import jakarta.persistence.EntityManager
 import jakarta.transaction.Transactional
@@ -55,17 +56,17 @@ class FriendshipService(
     }
 
     @Transactional
-    fun getFriendsList(currentUser: UUID): List<FriendshipRes> {
+    fun getFriendsList(currentUser: UUID): List<FriendshipWithUserProjection> {
         val friendships = friendshipRepository.findAcceptedFriendships(currentUser)
 
-        return friendships.map{it.toFriendshipRes()}
+        return friendships
     }
 
     @Transactional
-    fun getPendingFriendshipRequests(currentUser: UUID): List<FriendshipRes> {
+    fun getPendingFriendshipRequests(currentUser: UUID): List<FriendshipWithUserProjection> {
         val friendships = friendshipRepository.findPendingFriendships(currentUser)
 
-        return friendships.map{it.toFriendshipRes()}
+        return friendships
     }
 
     @Transactional

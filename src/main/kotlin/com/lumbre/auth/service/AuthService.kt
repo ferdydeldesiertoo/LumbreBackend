@@ -4,7 +4,7 @@ import com.lumbre.security.CustomUserDetails
 import com.lumbre.security.jwt.JwtService
 import com.lumbre.auth.dto.LoginUserReq
 import com.lumbre.auth.dto.RegisterUserReq
-import com.lumbre.auth.dto.TokenRes
+import com.lumbre.auth.dto.AuthRes
 import com.lumbre.user.entity.User
 import com.lumbre.auth.exception.UserAlreadyExistsException
 import com.lumbre.user.repository.UserRepository
@@ -26,7 +26,7 @@ class AuthService(
     private val logger = LoggerFactory.getLogger(AuthService::class.java)
 
     @Transactional
-    fun createUser(registerUserReq: RegisterUserReq): TokenRes {
+    fun createUser(registerUserReq: RegisterUserReq): AuthRes {
         if(userRepository.existsByEmail(registerUserReq.email)) {
             logger.warn("Attempted registration with an already existing email: ${registerUserReq.email}")
             throw UserAlreadyExistsException("Email is already registered")
@@ -44,17 +44,17 @@ class AuthService(
 
         val token = jwtService.generateToken(user.id, user.username, user.email)
 
-        return TokenRes(token)
+        return AuthRes(token, user.id!!)
     }
 
     @Transactional
-    fun loginUser(loginUserReq: LoginUserReq): TokenRes {
+    fun loginUser(loginUserReq: LoginUserReq): AuthRes {
         val authToken = UsernamePasswordAuthenticationToken(loginUserReq.identifier, loginUserReq.password)
 
         val authUser = authenticationManager.authenticate(authToken).principal as CustomUserDetails
 
         val token = jwtService.generateToken(authUser.getId(), authUser.username, authUser.getEmail())
 
-        return TokenRes(token)
+        return AuthRes(token, authUser.getId())
     }
 }

@@ -73,13 +73,13 @@ class JwtFilter(
 
         } catch (e: ExpiredJwtException) {
             SecurityContextHolder.clearContext()
-            log.warn("JWT expired for user: ${e.claims?.subject}", e)
+            log.warn("JWT expired for user: ${e.claims?.subject}")
 
             // Token has expired, delegate to custom entry point with specific exception
             customAuthenticationEntryPoint.commence(request, response, JwtExpiredException("JWT is expired", e))
         } catch (e: Exception) {
             SecurityContextHolder.clearContext()
-            log.warn("Invalid JWT. Reason: ${e.javaClass.name} - ${e.message}", e)
+            log.warn("Invalid JWT. Reason: ${e.javaClass.name} - ${e.message}")
 
             when (e) {
                 is MalformedJwtException, is SignatureException, is IllegalArgumentException -> {

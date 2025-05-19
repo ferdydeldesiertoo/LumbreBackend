@@ -1,7 +1,7 @@
 package com.lumbre.user.entity
 
 import com.lumbre.friendship.entity.Friendship
-import com.lumbre.messages.entity.Message
+import com.lumbre.message.entity.Message
 import com.lumbre.user.dto.UserInfoRes
 import jakarta.persistence.*
 import java.time.LocalDateTime
@@ -41,5 +41,5 @@ class User(
 )
 
 fun User.toUserInfo(): UserInfoRes {
-    return UserInfoRes(id!!, username, bio, profileImageUrl)
+    return UserInfoRes(id!!, username, bio, profileImageUrl, createdAt!!)
 }

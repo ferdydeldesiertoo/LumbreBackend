@@ -1,6 +1,7 @@
 package com.lumbre.friendship.controller
 
 import com.lumbre.friendship.dto.FriendshipRes
+import com.lumbre.friendship.dto.FriendshipWithUserProjection
 import com.lumbre.friendship.dto.SendFriendshipReq
 import com.lumbre.friendship.service.FriendshipService
 import com.lumbre.security.CustomUserDetails
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/api/friendship")
+@RequestMapping("/api/friendships")
 class FriendshipController(val friendshipService: FriendshipService) {
     @PostMapping
     fun addFriendship(
@@ -24,14 +25,14 @@ class FriendshipController(val friendshipService: FriendshipService) {
     }
 
     @GetMapping("/friends")
-    fun getFriendships(@CurrentUser currentUser: CustomUserDetails): ResponseEntity<List<FriendshipRes>> {
+    fun getFriendships(@CurrentUser currentUser: CustomUserDetails): ResponseEntity<List<FriendshipWithUserProjection>> {
         val friendships = friendshipService.getFriendsList(currentUser.getId())
 
         return ResponseEntity.status(HttpStatus.OK).body(friendships)
     }
 
     @GetMapping("/requests")
-    fun getPendingFriendshipRequests(@CurrentUser currentUser: CustomUserDetails): ResponseEntity<List<FriendshipRes>> {
+    fun getPendingFriendshipRequests(@CurrentUser currentUser: CustomUserDetails): ResponseEntity<List<FriendshipWithUserProjection>> {
         val friendships = friendshipService.getPendingFriendshipRequests(currentUser.getId())
 
         return ResponseEntity.status(HttpStatus.OK).body(friendships)
